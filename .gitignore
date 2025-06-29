@@ -1,0 +1,16 @@
+# Ignore virtual environments
+env/
+venv/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore SQLite database if not needed
+*.db
+
+# Ignore VSCode settings (optional)
+.vscode/
+
+# Ignore instance folder if it has secrets or configs
+instance/
