@@ -11,7 +11,8 @@
         <tr>
             <th> Activites </th>
             <th> People </th>
-            <th> Added </th>
+            <th> Date </th>
+            <th> Created </th>
             <th> Actions</th>
         </tr>
         {% for activity in activities %}
@@ -24,6 +25,7 @@
                     {% endfor %}
                 </ul>
             </td>
+            <td>{{ activity.plan_date.date() }} </td>
             <td>{{ activity.date_created.date() }}</td>
             <td>
                 <a href="/delete/{{ activity.id }}">Delete</a>
@@ -38,7 +40,8 @@
         <form action="/" method="POST">
             <input type="text" name="activity" id="activity" placeholder="WHAT'S THE PLAN!">
             <input type="text" name="people" id="people" placeholder="WHO'S GOING">
-            <input type="date" name="plan_for">
+            <input type="text" name="location" id="location" placeholder="WHERE WE GOING">
+            <input type="date" name="plan_for" id="date">
             <input type="submit" value="Add activity">
         </form>
 

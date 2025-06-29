@@ -12,6 +12,7 @@ db = SQLAlchemy(app)  # initialize the database
 class Plan(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     activity = db.Column(db.String(200), nullable=False)
+    location = db.Column(db.String(300), nullable=False)
     people = db.Column(db.Text) # store as a json string
     plan_date = db.Column(db.DateTime, nullable=False)
     date_created = db.Column(db.DateTime(timezone=True),
@@ -30,8 +31,9 @@ class Plan(db.Model):
 def index():
     if request.method == 'POST':
         activity_content = request.form['activity']
+        location_content = request.form['location']
         people_content = request.form['people']
-        plan_date_str = request.form['date']
+        plan_date_str = request.form['plan_for']
         
         plan_date = datetime.fromisoformat(plan_date_str)
         if plan_date <= datetime.now():
@@ -39,7 +41,7 @@ def index():
         
         people_list = [p.strip() for p in people_content.split(',') if p.strip()]
         
-        new_activity = Plan(activity=activity_content, plan_for = plan_date)
+        new_activity = Plan(activity=activity_content, location = location_content, plan_date=plan_date)
         new_activity.set_people(people_list)
         
         try:
