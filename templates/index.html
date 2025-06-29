@@ -9,13 +9,21 @@
     <h1 style="text-align: center"> Plans??? </h1>
     <table>
         <tr>
-            <th> Table</th>
-            <th> Added</th>
+            <th> Activites </th>
+            <th> People </th>
+            <th> Added </th>
             <th> Actions</th>
         </tr>
         {% for activity in activities %}
         <tr>
-            <td>{{ activity.content }}</td>
+            <td>{{ activity.activity }}</td>
+            <td>
+                <ul>
+                    {% for person in activity.get_people() %}
+                        <li>{{ person }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
             <td>{{ activity.date_created.date() }}</td>
             <td>
                 <a href="/delete/{{ activity.id }}">Delete</a>
@@ -28,7 +36,9 @@
 
     <div class=form>
         <form action="/" method="POST">
-            <input type="text" name="content" id="content">
+            <input type="text" name="activity" id="activity" placeholder="WHAT'S THE PLAN!">
+            <input type="text" name="people" id="people" placeholder="WHO'S GOING">
+            <input type="date" name="plan_for">
             <input type="submit" value="Add activity">
         </form>
 
