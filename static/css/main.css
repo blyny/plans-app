@@ -35,6 +35,22 @@ td {
     margin-top: 20px;
 }
 
+textarea {
+    width: 100%;
+    font-size: 16px;
+    padding: 8px;
+    box-sizing: border-box;
+    resize: vertical;
+    white-space: pre-wrap;
+}
+input[type="text"] {
+    width: 100%;
+    font-size: 16px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
 #content {
     width: 100%;
 }
+
