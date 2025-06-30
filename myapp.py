@@ -16,8 +16,6 @@ class Plan(db.Model):
     location = db.Column(db.String(300), nullable=False)
     people = db.Column(db.Text)  # store as a json string
     plan_date = db.Column(db.DateTime, nullable=False)
-    date_created = db.Column(db.DateTime(timezone=True),
-                             default=lambda: datetime.now(timezone.utc))
 
     def set_people(self, people_list):
         self.people = json.dumps(people_list)
@@ -42,7 +40,7 @@ def index():
             if plan_date <= datetime.now():
                 return "Unless it's today or you can go back in time.... pick a future date"
         else:
-            return "PICK A DATE"
+            return "Did you fill everything out?"
 
         people_list = [p.strip()
                        for p in people_content.split(',') if p.strip()]
@@ -59,7 +57,7 @@ def index():
         except:
             "Err.. trouble adding the activity to the plan"
     else:
-        activities = Plan.query.order_by(Plan.date_created).all()
+        activities = Plan.query.order_by(Plan.plan_date).all()
         return render_template('index.html', activities=activities)
 
 
