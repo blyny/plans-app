@@ -100,7 +100,7 @@ input:focus {
 .calendar-icon {
   position: absolute;
   top: -45%;
-  right: 10%;
+  right: 5%;
   width: 10rem;
   height: 10rem;
   
@@ -108,17 +108,17 @@ input:focus {
 .chat-icon {
   position: absolute;
   top: 10%;
-  right: 25%;
+  right: 22%;
   width: 10rem;
   height: 10rem;
   z-index: 1;
 }
 .pin-icon {
   position: absolute;
-  top: 60%;
-  right: 5%;
-  width: 10rem;
-  height: 10rem;
+  top: 80%;
+  right: 10%;
+  width: 9rem;
+  height: 12rem;
 }
 
 button {
