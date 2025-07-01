@@ -6,30 +6,31 @@
 {% endblock %}
 
 {% block body %}
-<table>
-    {% for activity in activities %}
-    <tr>
-        <td>{{ activity.activity }}</td>
-        <td>{{ activity.location }}</td>
-        <td>
-            <ul>
-                {% for person in activity.get_people() %}
-                <li>{{ person }}</li>
-                {% endfor %}
-            </ul>
-        </td>
-        <td>{{ activity.plan_date.date() }} </td>
-        <td>
-            <a href="/delete/{{ activity.id }}">Delete</a>
-            <br>
-            <a href="/update/{{ activity.id }}">Update</a>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
-
-<a href = "{{ url_for('create') }}">
-    <Button> Create a new plan! </Button>
-</a>
+<div class="main">
+    <table>
+        {% for activity in activities %}
+        <tr>
+            <td>{{ activity.activity }}</td>
+            <td>{{ activity.location }}</td>
+            <td>
+                <ul>
+                    {% for person in activity.get_people() %}
+                    <li>{{ person }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ activity.plan_date.date() }} </td>
+            <td>
+                <a href="/delete/{{ activity.id }}">Delete</a>
+                <br>
+                <a href="/update/{{ activity.id }}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <a href="{{ url_for('create') }}">
+        <Button> Create a new plan! </Button></a>
+</div>
 
 {% endblock %}

@@ -7,6 +7,10 @@ html {
     
 }
 
+h1 {
+  font-size: 2.1rem;
+}
+
 .content {
   width: 75%;
   max-width: 800px;
@@ -16,33 +20,6 @@ html {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
-table,
-td,
-th {
-    border: 1px solid #aaa;
-    
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th {
-    height: 30px;
-}
-
-td {
-    text-align: center;
-    padding: 5px;
-}
-
-h1 {
-    text-align: left;
-    
-}
-
 
 /* --------- button --------------- */ 
   button {
