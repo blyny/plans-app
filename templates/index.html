@@ -2,63 +2,34 @@
 
 {% block head %}
 <Title> Let's Plan!</Title>
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css') }}">
 {% endblock %}
 
 {% block body %}
-<div class="content">
-    <h1> Let's Make a Plan!! </h1>
-    <table>
-        {% for activity in activities %}
-        <tr>
-            <td>{{ activity.activity }}</td>
-            <td>{{ activity.location }}</td>
-            <td>
-                <ul>
-                    {% for person in activity.get_people() %}
-                        <li>{{ person }}</li>
-                    {% endfor %}
-                </ul>
-            </td>
-            <td>{{ activity.plan_date.date() }} </td>
-            <td>
-                <a href="/delete/{{ activity.id }}">Delete</a>
-                <br>
-                <a href="/update/{{ activity.id }}">Update</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+<table>
+    {% for activity in activities %}
+    <tr>
+        <td>{{ activity.activity }}</td>
+        <td>{{ activity.location }}</td>
+        <td>
+            <ul>
+                {% for person in activity.get_people() %}
+                <li>{{ person }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+        <td>{{ activity.plan_date.date() }} </td>
+        <td>
+            <a href="/delete/{{ activity.id }}">Delete</a>
+            <br>
+            <a href="/update/{{ activity.id }}">Update</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
 
-    <div class=form>
-        <form action="/" method="POST">
-
-            <div class="image_and_input">
-                <label for="activity">Activity:</label>
-                <textarea name="activity" id="activity" ></textarea>
-                <img src="/static/icons/calendar-icon.png" class="calendar-icon">
-            </div>
-
-            <div class="image_and_input">
-                <label for="people">Who's going?</label>
-                <input type="text" name="people" id="people" >
-                <img src="/static/icons/chat-icon.png" class="chat-icon">
-            </div>
-
-            <div class="image_and_input">
-                <label for="location">Where and When:</label>
-                <input type="text" name="location" id="location">
-                <img src="/static/icons/map-pin-icon.png" class="pin-icon">
-            </div>
- 
-
-            <label for="date"> Date: </label>
-            <input type="date" name="plan_for" id="date">
-            <p style="margin-bottom: 20px;"></p>
-            <button type="submit"> Add Plan </button>
-        </form>
-
-    </div>
-
-</div>
+<a href = "{{ url_for('create') }}">
+    <Button> Create a new plan! </Button>
+</a>
 
 {% endblock %}

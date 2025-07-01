@@ -61,6 +61,39 @@ def index():
         return render_template('index.html', activities=activities)
 
 
+@app.route('/create', methods=['GET', 'POST'])
+def create():
+    if request.method == 'POST':
+        activity_content = request.form['activity']
+        location_content = request.form['location']
+        people_content = request.form['people']
+        plan_date_str = request.form['plan_for']
+
+        if plan_date_str:
+            plan_date = datetime.fromisoformat(plan_date_str)
+            if plan_date <= datetime.now():
+                return "Unless it's today or you can go back in time.... pick a future date"
+        else:
+            return "Did you fill everything out?"
+
+        people_list = [p.strip()
+                       for p in people_content.split(',') if p.strip()]
+
+        new_activity = Plan(activity=activity_content,
+                            location=location_content, plan_date=plan_date)
+        new_activity.set_people(people_list)
+
+        try:
+            db.session.add(new_activity)
+            db.session.commit()
+            # send_discord_notification()
+            return redirect('/')
+        except:
+            "Err.. trouble adding the activity to the plan"
+    else:
+        return render_template('create.html')
+
+
 @app.route('/delete/<int:id>')
 def delete(id):
     plan_to_delete = Plan.query.get_or_404(id)
@@ -73,7 +106,7 @@ def delete(id):
 
 
 def send_discord_notification():
-    webhook_url = 'https://discord.com/api/webhooks/1389077022671900714/ecG_g5MsGOJCdNlu7wuXfcDALnlhNtW8hyiC3HOG1Gltwj2EOq7bILQIecSkk38LekAV'
+    webhook_url = ''
     data = {
         "content": f"@everyone 📅 New Plan Created!"
     }
